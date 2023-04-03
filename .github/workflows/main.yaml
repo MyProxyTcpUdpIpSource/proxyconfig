@@ -1,0 +1,42 @@
+name: createClashConfig
+
+on:
+  push:
+    tags:
+      - v*
+
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  epoint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install yaml
+        run: python -m pip install --upgrade pip pyyaml
+
+      - name: download config
+        run: bash download.sh
+
+      - name: run python for convert
+        run: python convert.py
+
+      - name: update git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add "AzadNet_IRAN-Direct1.yml"
+          git add "sub_merge_yaml.yml"
+          git commit -m "auto update"
+          git push origin HEAD:refs/heads/main --force
+
