@@ -36,7 +36,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add "AzadNet_IRAN-Direct1.yml"
-          git add "sub_merge_yaml.yml"
+          git add "conf.yaml"
           git commit -m "auto update"
           git push origin HEAD:refs/heads/main --force
 

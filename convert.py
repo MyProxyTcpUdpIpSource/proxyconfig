@@ -66,5 +66,5 @@ y['proxy-groups'] = [
 y['rules'] = read_ruler_file_yaml['rules']
 
 #write it
-with open("out.yaml","w") as f:
+with open("conf.yaml","w") as f:
 	f.write( yaml.dump(y) )
