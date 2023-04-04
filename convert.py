@@ -70,3 +70,4 @@ y['rules'] = [
 #write it
 with open("conf.yaml","w") as f:
 	f.write( yaml.dump(y) )
+
