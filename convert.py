@@ -7,7 +7,6 @@ except ImportError:
     from yaml import Loader, Dumper
 
 proxyFile="sub_merge_yaml.yml"
-ruleFile="AzadNet_IRAN-Direct1.yml"
 
 def yaml_loader(file_name):
 	d=open(file_name,"r")
@@ -16,7 +15,6 @@ def yaml_loader(file_name):
 	return yload
 
 read_proxy_file_yaml = yaml_loader(proxyFile)
-read_ruler_file_yaml = yaml_loader(ruleFile) #only for rule section
 
 #config
 y={}
@@ -39,7 +37,7 @@ all_names = [ i['name'] for i in y['proxies'] ]
 
 y['proxy-groups'] = [
 	{
-		'name': '\U0001F530 All Proxies',
+		'name': 'All Proxies',
 		'type': 'select',
 		'proxies': all_names
 	},
@@ -52,18 +50,22 @@ y['proxy-groups'] = [
 		'proxies': all_names
 	},
 	{
-		'name': '⛔Direct',
+		'name': 'Direct',
 		'type': 'select',
 		'proxies': ['DIRECT']
 	},
 	{
-		'name': '⛔BLOCK',
+		'name': 'BLOCK',
 		'type': 'select',
 		'proxies': ['REJECT']
 	},
 ]
 
-y['rules'] = read_ruler_file_yaml['rules']
+y['rules'] = [
+	'GEOIP,IR,Direct',
+	'DOMAIN-SUFFIX,ir,Direct',
+	'MATCH,All Proxies'
+]
 
 #write it
 with open("conf.yaml","w") as f:
