@@ -1,6 +1,8 @@
 name: createClashConfig
 
 on:
+  workflow_dispatch:
+
   push:
     tags:
       - v*
